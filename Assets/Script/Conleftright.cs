@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Conleftright : MonoBehaviour {
-bool rlx = false;
+    bool rlx = false;
+    float zx = 0f;
 	// Use this for initialization
 	void Start () {
 
@@ -14,16 +15,17 @@ void Update () {
 			Vector3 tmp = GameObject.Find("Player").transform.position;
 		if(Input.GetKey("x") && rlx == false) {
 			rlx = true;
-			if(tmp.x + 4 < 6){
-
-				GameObject.Find("Player").transform.position = new Vector3(tmp.x + 4, tmp.y, tmp.z);
+			if(zx < 1.0f){
+                zx++;
+				GameObject.Find("Player").transform.position = new Vector3(zx *4.0f, tmp.y, tmp.z);
 			}
 			Invoke("DelayMethod", 1.0f);
 		}
 		if(Input.GetKey("z") && rlx == false) {
-			rlx = true;
-			if(tmp.x - 4 >-6){
-				GameObject.Find("Player").transform.position = new Vector3(tmp.x - 4, tmp.y, tmp.z);
+            rlx = true;
+			if(zx > -1.0f){
+                zx--;
+                GameObject.Find("Player").transform.position = new Vector3(zx * 4.0f, tmp.y, tmp.z);
 			}
 			Invoke("DelayMethod", 1.0f);
 		}

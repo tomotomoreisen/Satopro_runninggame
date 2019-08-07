@@ -1,10 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Conleftright : MonoBehaviour {
 bool rlx = false;
-	// Use this for initialization
+float zx = 0f;
+//float zure = 1.0f/14.0f;//ここ
 	void Start () {
 
 	}
@@ -14,19 +15,26 @@ void Update () {
 			Vector3 tmp = GameObject.Find("Player").transform.position;
 		if(Input.GetKey("x") && rlx == false) {
 			rlx = true;
-			if(tmp.x + 4 < 6){
-
-				GameObject.Find("Player").transform.position = new Vector3(tmp.x + 4, tmp.y, tmp.z);
+			if(zx < 1.0f){
+				zx++;
+				GameObject.Find("Player").transform.position = new Vector3(zx * 4.0f, tmp.y, tmp.z);
 			}
 			Invoke("DelayMethod", 1.0f);
 		}
 		if(Input.GetKey("z") && rlx == false) {
 			rlx = true;
-			if(tmp.x - 4 >-6){
-				GameObject.Find("Player").transform.position = new Vector3(tmp.x - 4, tmp.y, tmp.z);
+			if(zx > -1.0f){
+				zx--;
+				GameObject.Find("Player").transform.position = new Vector3(zx * 4.0f, tmp.y, tmp.z);
 			}
-			Invoke("DelayMethod", 1.0f);
+			Invoke("DelayMethod", 0.1f);
 		}
+		//if(Input.GetKey(KeyCode.Space)&& rlx == false ){ //ここから
+			  //rlx = true;
+			//	GameObject.Find("Player").transform.position = new Vector3(tmp.x - zure, tmp.y, tmp.z);
+				//Invoke("DelayMethod", 0.5f);
+		//}//ここまで
+
 }
 
 void DelayMethod(){

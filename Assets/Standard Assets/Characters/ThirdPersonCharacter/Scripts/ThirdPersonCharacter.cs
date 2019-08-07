@@ -9,11 +9,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	{
 		[SerializeField] float m_MovingTurnSpeed = 360;
 		[SerializeField] float m_StationaryTurnSpeed = 180;
-		[SerializeField] float m_JumpPower = 12f;
+		public float m_JumpPower = 10f;
 		[Range(1f, 4f)][SerializeField] float m_GravityMultiplier = 2f;
 		[SerializeField] float m_RunCycleLegOffset = 0.2f; //specific to the character in sample assets, will need to be modified to work with others
-		[SerializeField] float m_MoveSpeedMultiplier = 1f;
-		[SerializeField] float m_AnimSpeedMultiplier = 1f;
+		public float m_MoveSpeedMultiplier = 1f;
+		public float m_AnimSpeedMultiplier = 1f;
 		[SerializeField] float m_GroundCheckDistance = 0.1f;
 
 		Rigidbody m_Rigidbody;
@@ -37,11 +37,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Capsule = GetComponent<CapsuleCollider>();
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
-
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
 		}
 
+		public void Speedup(){
+			if(m_MoveSpeedMultiplier<2.0){
+				m_MoveSpeedMultiplier += 0.1f;
+				m_AnimSpeedMultiplier += 0.1f;
+			}
+		}
 
 		public void Move(Vector3 move, bool crouch, bool jump)
 		{

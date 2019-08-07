@@ -16,11 +16,14 @@ public class CreateRoad : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Vector3 tmp = GameObject.Find("Player").transform.position;
-		if(tmp.z > border){
+		if(tmp.z > border + 2){
 			CreateMap ();
 		}
-	}
+        float width = GameObject.Find("Middle").GetComponent<Renderer>().bounds.size.x;
+        Debug.Log("width:" + width);
+    }
 	void CreateMap(){
+
 		if (road1.transform.position.z < border) {
 			border+=80;
 			Vector3 temp = new Vector3 (0,0,border);
@@ -31,7 +34,7 @@ public class CreateRoad : MonoBehaviour {
 			border+=80;
 			Vector3 temp = new Vector3 (0,0,border);
 			road2.transform.position = temp;
-
+			GameObject.Find("Player").GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter>().Speedup();
 		}
 	}
 
